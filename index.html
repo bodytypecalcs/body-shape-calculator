@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Shape Calculator – Find Your Body Shape in Seconds</title>
+<meta name="description" content="Free body shape calculator for women and men. Enter bust, waist, high hip and hip measurements in inches or cm to find your body shape, waist-to-hip ratio and styling tips.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Body Shape Calculator – Find Your Body Shape in Seconds">
+<meta property="og:description" content="Enter four measurements and discover your body shape, waist-to-hip ratio and what to wear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebApplication",
+      "name":"Body Shape Calculator",
+      "applicationCategory":"LifestyleApplication",
+      "operatingSystem":"Browser",
+      "inLanguage":"en",
+      "description":"Calculate your body shape from bust, waist, high hip and hip measurements, with waist-to-hip ratio and styling tips for women and men.",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"How do I find out my body shape?","acceptedAnswer":{"@type":"Answer","text":"Measure your bust, waist, high hip and hips with a soft tape measure, then enter the numbers into a body shape calculator. It compares the differences between your measurements and returns the shape that matches your proportions."}},
+        {"@type":"Question","name":"What is the most common female body shape?","acceptedAnswer":{"@type":"Answer","text":"In the research behind the FFIT method, the rectangle shape was the most common among the women measured, followed by the spoon and bottom hourglass shapes. A true hourglass is less common than many people think."}},
+        {"@type":"Question","name":"Should I measure in inches or centimetres?","acceptedAnswer":{"@type":"Answer","text":"Either works. The calculator converts centimetres to inches internally because the shape rules were developed using inch-based differences."}},
+        {"@type":"Question","name":"Can my body shape change?","acceptedAnswer":{"@type":"Answer","text":"Your proportions can shift with age, pregnancy, hormones, training or weight changes, so your result can change over time. Your skeletal frame, such as shoulder and hip width, stays largely the same."}},
+        {"@type":"Question","name":"Is waist-to-hip ratio a health measure?","acceptedAnswer":{"@type":"Answer","text":"The World Health Organization uses waist-to-hip ratio as one indicator of abdominal fat. It is only a rough screening value and does not replace advice from a doctor."}},
+        {"@type":"Question","name":"Does the calculator work for men?","acceptedAnswer":{"@type":"Answer","text":"Yes. Switch to the male mode and enter your shoulder circumference, waist and hips. The calculator returns one of five male body types: trapezoid, inverted triangle, rectangle, triangle or oval."}}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a href="#" class="logo" aria-label="Body Shape Calculator home">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#3b1f3a"/><path d="M11 8c2 4 2 7 0 10 3 2 3 4 1 7M21 8c-2 4-2 7 0 10-3 2-3 4-1 7" stroke="#f2b8b5" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+      <span>Body<i>Shape</i></span>
+    </a>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span><span></span></button>
+    <nav class="nav">
+      <a href="#" class="cur">Calculator</a>
+      <a href="#shapes">Body Shapes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="tag">Free · No sign-up · Inches or cm</span>
+      <h1>Find your body shape in <em>four measurements</em></h1>
+      <p>Hourglass, pear, rectangle or something in between? Enter your bust, waist, high hip and hip measurements and get your shape, your waist-to-hip ratio and practical styling tips. For an even more detailed analysis with match percentages, try the <a href="https://bodytypecalcs.com/">Body Shape Calculator</a> on bodytypecalcs.com.</p>
+      <ul class="hero-points">
+        <li>Based on the FFIT research method</li>
+        <li>9 female shapes &amp; 5 male types</li>
+        <li>Your data never leaves your browser</li>
+      </ul>
+    </div>
+
+    <!-- ===== CALCULATOR ===== -->
+    <div class="calc" id="calculator" aria-label="Body shape calculator">
+      <div class="toggles">
+        <div class="tg" id="g-sex" role="group" aria-label="Gender">
+          <button type="button" data-v="f" class="on">Female</button>
+          <button type="button" data-v="m">Male</button>
+        </div>
+        <div class="tg" id="g-unit" role="group" aria-label="Unit">
+          <button type="button" data-v="in" class="on">in</button>
+          <button type="button" data-v="cm">cm</button>
+        </div>
+      </div>
+
+      <div class="fields">
+        <label class="fd"><span id="l-bust">Bust</span><small id="h-bust">Fullest part of the chest</small>
+          <div class="in-u"><input type="number" id="m-bust" value="36" min="0" step="0.1" inputmode="decimal"><b class="u">in</b></div></label>
+        <label class="fd"><span>Waist</span><small>Narrowest point, above the belly button</small>
+          <div class="in-u"><input type="number" id="m-waist" value="27" min="0" step="0.1" inputmode="decimal"><b class="u">in</b></div></label>
+        <label class="fd" id="f-hh"><span>High hip</span><small>About 7 in / 18 cm below the waist</small>
+          <div class="in-u"><input type="number" id="m-hh" value="33" min="0" step="0.1" inputmode="decimal"><b class="u">in</b></div></label>
+        <label class="fd"><span>Hips</span><small>Widest part of hips and seat</small>
+          <div class="in-u"><input type="number" id="m-hip" value="37" min="0" step="0.1" inputmode="decimal"><b class="u">in</b></div></label>
+      </div>
+      <button class="cta" id="go">Calculate my body shape</button>
+      <p class="err" id="err" role="alert"></p>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ===== RESULT ===== -->
+  <section class="result" id="result" aria-live="polite">
+    <div class="r-fig">
+      <svg viewBox="0 0 200 320" id="fig" aria-label="Silhouette based on your measurements"></svg>
+      <span class="r-fig-cap">Silhouette drawn from your numbers</span>
+    </div>
+    <div class="r-body">
+      <span class="r-kicker">Your body shape</span>
+      <h2 class="r-name" id="r-name">Hourglass</h2>
+      <p class="r-desc" id="r-desc"></p>
+      <div class="r-stats">
+        <div><span>Waist-to-hip ratio</span><b id="r-whr">0.73</b><em id="r-whr-t">lower risk range</em></div>
+        <div><span>Bust − hips</span><b id="r-bh">−1.0 in</b></div>
+        <div><span>Hips − waist</span><b id="r-hw">10.0 in</b></div>
+      </div>
+      <div class="r-close">
+        <h3>Your proportions</h3>
+        <div id="r-bars"></div>
+      </div>
+    </div>
+    <div class="r-tips">
+      <h3>Styling ideas for you</h3>
+      <ul id="r-tips"></ul>
+      <button class="copy" id="copy">Copy my result</button>
+      <p class="r-note">Results describe proportions only – every body shape is a good body shape.</p>
+    </div>
+  </section>
+
+  <!-- ===== HOW TO MEASURE ===== -->
+  <section class="sec">
+    <span class="eyebrow">Step one</span>
+    <h2>How to measure yourself correctly</h2>
+    <p class="lead">Accurate numbers make the difference between two neighbouring shapes. Use a soft tape measure, stand relaxed in front of a mirror and wear light, close-fitting clothes or underwear.</p>
+    <div class="measure">
+      <article><b>1</b><h3>Bust</h3><p>Wrap the tape around the fullest part of your chest, keeping it parallel to the floor. Wear a non-padded bra. Men measure the shoulders at their widest point instead.</p></article>
+      <article><b>2</b><h3>Waist</h3><p>Find your natural waist – the narrowest point of your torso, usually just above the belly button. Breathe out normally and do not pull the tape tight.</p></article>
+      <article><b>3</b><h3>High hip</h3><p>Measure around the top of your hip bones, roughly 7 inches (18 cm) below your waist. This number separates the spoon shape from the bottom hourglass.</p></article>
+      <article><b>4</b><h3>Hips</h3><p>Stand with feet together and measure around the widest part of your hips and seat. Check in the mirror that the tape stays level all the way round.</p></article>
+    </div>
+  </section>
+
+  <!-- ===== SHAPES ===== -->
+  <section class="sec" id="shapes">
+    <span class="eyebrow">The shapes</span>
+    <h2>Female body shapes explained</h2>
+    <p class="lead">The calculator sorts your proportions into the following shapes. Most people sit close to a border between two shapes, which is why the result also shows how near you are to the alternatives.</p>
+    <div class="shapes">
+      <article><h3>Hourglass</h3><p>Bust and hips are almost the same size with a clearly defined waist – the classic balanced curve.</p></article>
+      <article><h3>Top Hourglass</h3><p>A defined waist with a bust that is slightly fuller than the hips.</p></article>
+      <article><h3>Bottom Hourglass</h3><p>A defined waist with hips slightly fuller than the bust.</p></article>
+      <article><h3>Spoon</h3><p>Hips noticeably wider than the bust, with a “shelf” at the high hip that gives a rounded lower half.</p></article>
+      <article><h3>Triangle (Pear)</h3><p>Hips wider than the bust, with a softer, less pronounced waist.</p></article>
+      <article><h3>Inverted Triangle</h3><p>Shoulders and bust are broader than the hips, with a straighter lower body.</p></article>
+      <article><h3>Rectangle</h3><p>Bust, waist and hips are fairly similar for a straight, athletic silhouette.</p></article>
+      <article><h3>Apple</h3><p>The midsection is the fullest area, often with slimmer legs and arms.</p></article>
+    </div>
+    <h2 class="mt">Male body types</h2>
+    <div class="shapes male">
+      <article><h3>Trapezoid</h3><p>Broad shoulders and chest tapering to a medium waist – the most balanced male frame.</p></article>
+      <article><h3>Inverted Triangle</h3><p>Very broad shoulders and a narrow waist, typical of athletic upper bodies.</p></article>
+      <article><h3>Rectangle</h3><p>Shoulders, waist and hips are similar in width.</p></article>
+      <article><h3>Triangle</h3><p>Hips are wider than the shoulders, with a fuller lower body.</p></article>
+      <article><h3>Oval</h3><p>The waist is the widest part of the body, often with a rounder midsection.</p></article>
+    </div>
+  </section>
+
+  <!-- ===== METHOD ===== -->
+  <section class="sec split">
+    <div>
+      <span class="eyebrow">Behind the numbers</span>
+      <h2>How the body shape calculator works</h2>
+      <p>The female results use the logic of FFIT – the Female Figure Identification Technique developed by researchers at North Carolina State University for the apparel industry. Instead of looking at single measurements, FFIT compares the <b>differences</b> between bust, waist, high hip and hips.</p>
+      <p>The rules are checked in a fixed order and the first rule that fits decides the shape. Centimetres are converted to inches first, because the original thresholds were defined in inches. The male mode uses the ratio of shoulders to waist and the comparison of shoulders and hips.</p>
+    </div>
+    <div class="rules">
+      <div><span>Hourglass</span><p>Bust ≈ hips (within 1–3.6 in) and waist at least 9–10 in smaller</p></div>
+      <div><span>Spoon</span><p>Hips more than 2 in larger than bust, high hip ≥ 1.193 × waist</p></div>
+      <div><span>Triangle</span><p>Hips at least 3.6 in larger than bust, waist difference under 9 in</p></div>
+      <div><span>Inverted triangle</span><p>Bust at least 3.6 in larger than hips, waist difference under 9 in</p></div>
+      <div><span>Rectangle</span><p>Bust and hips within 3.6 in, waist less than 9 in smaller</p></div>
+    </div>
+  </section>
+
+  <!-- ===== WHR ===== -->
+  <section class="sec">
+    <span class="eyebrow">Bonus value</span>
+    <h2>Waist-to-hip ratio (WHR)</h2>
+    <div class="whr">
+      <div class="whr-text">
+        <p>Your waist-to-hip ratio is your waist measurement divided by your hip measurement. Besides describing your silhouette, it is used by the World Health Organization as a simple indicator of where the body stores fat.</p>
+        <p>A waist of 28 in and hips of 38 in give a ratio of 28 ÷ 38 = <b>0.74</b>. The value is a rough screening number only and says nothing about fitness, beauty or overall health on its own.</p>
+      </div>
+      <table>
+        <thead><tr><th></th><th>Lower risk</th><th>Increased risk</th></tr></thead>
+        <tbody>
+          <tr><td>Women</td><td>below 0.85</td><td>0.85 and above</td></tr>
+          <tr><td>Men</td><td>below 0.90</td><td>0.90 and above</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="sec">
+    <span class="eyebrow">FAQ</span>
+    <h2>Body shape questions, answered</h2>
+    <div class="faq">
+      <details open><summary>How do I find out my body shape?</summary><p>Measure your bust, waist, high hip and hips with a soft tape measure, then enter the numbers into a body shape calculator. It compares the differences between your measurements and returns the shape that matches your proportions.</p></details>
+      <details><summary>What is the most common female body shape?</summary><p>In the research behind the FFIT method, the rectangle shape was the most common among the women measured, followed by the spoon and bottom hourglass shapes. A true hourglass is less common than many people think.</p></details>
+      <details><summary>Should I measure in inches or centimetres?</summary><p>Either works. The calculator converts centimetres to inches internally because the shape rules were developed using inch-based differences.</p></details>
+      <details><summary>Can my body shape change?</summary><p>Your proportions can shift with age, pregnancy, hormones, training or weight changes, so your result can change over time. Your skeletal frame, such as shoulder and hip width, stays largely the same.</p></details>
+      <details><summary>Is waist-to-hip ratio a health measure?</summary><p>The World Health Organization uses waist-to-hip ratio as one indicator of abdominal fat. It is only a rough screening value and does not replace advice from a doctor.</p></details>
+      <details><summary>Does the calculator work for men?</summary><p>Yes. Switch to the male mode and enter your shoulder circumference, waist and hips. The calculator returns one of five male body types: trapezoid, inverted triangle, rectangle, triangle or oval.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="wrap foot-in">
+    <div>
+      <span class="logo light"><span>Body<i>Shape</i></span></span>
+      <p>A free, private body shape calculator for women and men.</p>
+    </div>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#shapes">Body Shapes</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+      <a href="#">Imprint</a>
+    </nav>
+  </div>
+  <p class="wrap foot-copy">© <span id="yr"></span> BodyShape · For general information only, not medical advice.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var sex='f', unit='in';
+
+  var F={
+    hourglass:{n:'Hourglass',d:'Your bust and hips are nearly equal and your waist is clearly defined. Your curves are balanced from top to bottom.',t:['Wrap dresses and belted styles follow your natural waist.','Choose fitted rather than boxy cuts so your shape is not hidden.','High-waisted trousers and pencil skirts work well.'],p:[36,26,33,37]},
+    bhourglass:{n:'Bottom Hourglass',d:'You have a defined waist and your hips are slightly fuller than your bust.',t:['Add interest on top with structured shoulders or details.','Fit-and-flare dresses balance the upper and lower body.','Mid- to high-rise bootcut or straight jeans are flattering.'],p:[34,26,33,38]},
+    thourglass:{n:'Top Hourglass',d:'You have a defined waist and your bust is slightly fuller than your hips.',t:['V-necks and wrap tops keep the upper body streamlined.','A-line or flared skirts add volume to the lower half.','Belts at the natural waist highlight your shape.'],p:[38,27,32,36]},
+    spoon:{n:'Spoon',d:'Your hips are noticeably wider than your bust and you have a “shelf” at the high hip, giving a rounded lower body.',t:['Highlight the waist with belts or peplum tops.','Wide or boat necklines balance the shoulders.','A-line skirts skim over the high hip.'],p:[34,27,35,39]},
+    triangle:{n:'Triangle (Pear)',d:'Your hips are wider than your bust and your waist is softly defined.',t:['Light colours or prints on top draw the eye upward.','Dark, straight or bootcut trousers balance the hips.','Structured jackets that end at the hip work well.'],p:[33,30,35,39]},
+    inverted:{n:'Inverted Triangle',d:'Your shoulders and bust are broader than your hips, with a straighter lower body.',t:['V-necks and simple tops soften the shoulder line.','Wide-leg trousers and full skirts add volume below.','Avoid heavy shoulder pads or puff sleeves.'],p:[39,31,33,35]},
+    apple:{n:'Apple',d:'Your midsection is the fullest area, while legs and arms are often slimmer.',t:['Empire waists and flowing tops create a long line.','Show off your legs with straight or tapered trousers.','V-necks and open jackets lengthen the torso.'],p:[38,37,37,37]},
+    rectangle:{n:'Rectangle',d:'Your bust, waist and hips are fairly similar, giving a straight, athletic silhouette.',t:['Belts, peplums and wrap styles create waist definition.','Ruffles or details at bust and hip add curves.','Layering adds shape and dimension.'],p:[34,30,33,35]}
+  };
+  var M={
+    trapezoid:{n:'Trapezoid',d:'Your shoulders are broader than your waist with a balanced taper – the most proportionate male frame.',t:['Most cuts suit you – focus on good fit.','Slim-fit shirts and tailored jackets show your shape.','Straight-leg trousers keep the balance.'],p:[46,34,38]},
+    inverted:{n:'Inverted Triangle',d:'Your shoulders are very broad compared with a narrow waist.',t:['Avoid shoulder-heavy details like epaulettes.','Straight or relaxed trousers balance the upper body.','V-necks and open collars soften the chest.'],p:[50,32,37]},
+    rectangle:{n:'Rectangle',d:'Your shoulders, waist and hips are similar in width.',t:['Structured blazers add shoulder definition.','Layering and textured fabrics add dimension.','Tapered trousers create a V-like line.'],p:[42,36,38]},
+    triangle:{n:'Triangle',d:'Your hips are wider than your shoulders.',t:['Structured shoulders and horizontal stripes up top.','Dark, straight trousers streamline the lower half.','Avoid skinny fits on the legs.'],p:[38,36,41]},
+    oval:{n:'Oval',d:'Your waist is the widest part of your body.',t:['Vertical lines and single-breasted jackets lengthen.','Choose fabrics that drape rather than cling.','Mid-rise trousers with a straight leg work well.'],p:[44,44,42]}
+  };
+
+  function ffit(b,w,hh,h){
+    if(b-h<=1 && h-b<3.6 && (b-w>=9 || h-w>=10)) return 'hourglass';
+    if(h-b>=3.6 && h-b<10 && h-w>=9 && hh/w<1.193) return 'bhourglass';
+    if(b-h>1 && b-h<10 && b-w>=9) return 'thourglass';
+    if(h-b>2 && h-w>=7 && hh/w>=1.193) return 'spoon';
+    if(h-b>=3.6 && h-w<9) return 'triangle';
+    if(b-h>=3.6 && b-w<9) return 'inverted';
+    if(w>=h && w>=b-2) return 'apple';
+    return 'rectangle';
+  }
+  function male(s,w,h){
+    if(w>=h && w>=s*0.9) return 'oval';
+    if(h-s>=1) return 'triangle';
+    if(s/w>=1.4) return 'inverted';
+    if(s/w>=1.2) return 'trapezoid';
+    return 'rectangle';
+  }
+  function fmt(x){ return (x<0?'−':'')+Math.abs(x).toFixed(1); }
+
+  function figure(top,w,hh,h){
+    var mx=Math.max(top,w,hh,h), k=70/mx;
+    var T=top*k, W=w*k, HH=hh*k, H=h*k, c=100;
+    var d='M'+(c-12)+' 52 Q'+(c-T)+' 58 '+(c-T)+' 80 L'+(c-T*.95)+' 100 Q'+(c-W)+' 125 '+(c-W)+' 150 Q'+(c-HH)+' 165 '+(c-HH)+' 175 Q'+(c-H)+' 192 '+(c-H)+' 205 L'+(c-H*.62)+' 305 L'+(c-6)+' 305 L'+c+' 225'
+      +' L'+(c+6)+' 305 L'+(c+H*.62)+' 305 L'+(c+H)+' 205 Q'+(c+H)+' 192 '+(c+HH)+' 175 Q'+(c+HH)+' 165 '+(c+W)+' 150 Q'+(c+W)+' 125 '+(c+T*.95)+' 100 L'+(c+T)+' 80 Q'+(c+T)+' 58 '+(c+12)+' 52 Z';
+    $('fig').innerHTML='<defs><linearGradient id="gf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2b8b5"/><stop offset="1" stop-color="#d98a92"/></linearGradient></defs>'
+      +'<circle cx="100" cy="26" r="18" fill="url(#gf)"/><rect x="93" y="40" width="14" height="14" rx="4" fill="url(#gf)"/>'
+      +'<path d="'+d+'" fill="url(#gf)"/>'
+      +'<g stroke="#3b1f3a" stroke-dasharray="3 4" stroke-width="1.2" opacity=".55"><line x1="'+(c-T-8)+'" y1="88" x2="'+(c+T+8)+'" y2="88"/><line x1="'+(c-W-8)+'" y1="150" x2="'+(c+W+8)+'" y2="150"/><line x1="'+(c-H-8)+'" y1="205" x2="'+(c+H+8)+'" y2="205"/></g>';
+  }
+
+  var resultText='';
+  function calc(scroll){
+    var f=unit==='cm'?1/2.54:1;
+    var b=parseFloat($('m-bust').value)*f, w=parseFloat($('m-waist').value)*f, hh=parseFloat($('m-hh').value)*f, h=parseFloat($('m-hip').value)*f;
+    var need=sex==='f'?[b,w,hh,h]:[b,w,h];
+    if(need.some(function(x){return !(x>0);})){ $('err').textContent='Please fill in all measurements with numbers above zero.'; return; }
+    $('err').textContent='';
+    var key, data, set, vals;
+    if(sex==='f'){ key=ffit(b,w,hh,h); set=F; vals=[b,w,hh,h]; figure(b,w,hh,h); }
+    else { key=male(b,w,h); set=M; vals=[b,w,h]; figure(b,w,(w+h)/2,h); }
+    data=set[key];
+    $('r-name').textContent=data.n;
+    $('r-desc').textContent=data.d;
+    $('r-tips').innerHTML=data.t.map(function(x){return '<li>'+x+'</li>';}).join('');
+    var whr=w/h, lim=sex==='f'?0.85:0.90;
+    $('r-whr').textContent=whr.toFixed(2);
+    $('r-whr-t').textContent=whr<lim?'lower risk range (WHO)':'above WHO threshold of '+lim.toFixed(2);
+    $('r-whr-t').className=whr<lim?'ok':'hi';
+    var uf=unit==='cm'?2.54:1, un=unit==='cm'?' cm':' in';
+    $('r-bh').textContent=fmt((b-h)*uf)+un;
+    $('r-hw').textContent=fmt((h-w)*uf)+un;
+    var lbl=sex==='f'?['Bust','Waist','High hip','Hips']:['Shoulders','Waist','Hips'];
+    var mxv=Math.max.apply(null,vals);
+    $('r-bars').innerHTML=vals.map(function(x,i){
+      var isW=lbl[i]==='Waist';
+      return '<div class="bar'+(isW?'':' main')+'"><span>'+lbl[i]+'</span><i><s style="width:'+(x/mxv*100)+'%"></s></i><b>'+(Math.round(x*uf*10)/10).toString().replace(/\.0$/,'')+un.replace(' ','')+'</b></div>';
+    }).join('');
+    $('result').classList.add('show');
+    resultText='My body shape: '+data.n+' (waist-to-hip ratio '+whr.toFixed(2)+')';
+    if(scroll) $('result').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function group(id,cb){
+    var g=$(id);
+    g.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click',function(){ g.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===btn);}); cb(btn.dataset.v); });
+    });
+  }
+  group('g-sex',function(v){
+    sex=v;
+    $('f-hh').style.display=v==='f'?'':'none';
+    $('l-bust').textContent=v==='f'?'Bust':'Shoulders';
+    $('h-bust').textContent=v==='f'?'Fullest part of the chest':'Around the widest point of the shoulders';
+    var cm=unit==='cm'?2.54:1;
+    if(v==='m'){ $('m-bust').value=(46*cm).toFixed(1).replace(/\.0$/,''); $('m-waist').value=(34*cm).toFixed(1).replace(/\.0$/,''); $('m-hip').value=(38*cm).toFixed(1).replace(/\.0$/,''); }
+    else { $('m-bust').value=(36*cm).toFixed(1).replace(/\.0$/,''); $('m-waist').value=(27*cm).toFixed(1).replace(/\.0$/,''); $('m-hh').value=(33*cm).toFixed(1).replace(/\.0$/,''); $('m-hip').value=(37*cm).toFixed(1).replace(/\.0$/,''); }
+    calc(false);
+  });
+  group('g-unit',function(v){
+    if(v===unit) return;
+    var f=v==='cm'?2.54:1/2.54;
+    ['m-bust','m-waist','m-hh','m-hip'].forEach(function(id){ var x=parseFloat($(id).value); if(x>0) $(id).value=(Math.round(x*f*10)/10); });
+    unit=v;
+    document.querySelectorAll('.u').forEach(function(u){u.textContent=v;});
+    $('f-hh').querySelector('small').textContent='About 7 in / 18 cm below the waist';
+    calc(false);
+  });
+  $('go').addEventListener('click',function(){calc(true);});
+  ['m-bust','m-waist','m-hh','m-hip'].forEach(function(id){ $(id).addEventListener('keydown',function(e){ if(e.key==='Enter') calc(true); }); });
+  $('copy').addEventListener('click',function(){
+    var t=resultText, done=function(){ var e=$('toast'); e.textContent='Result copied'; e.classList.add('show'); setTimeout(function(){e.classList.remove('show');},1800); };
+    if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(t).then(done); return; }
+    var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand('copy');done();}catch(e){} a.remove();
+  });
+  document.querySelectorAll('.nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.nav').classList.remove('open');});});
+  $('yr').textContent=new Date().getFullYear();
+  calc(false);
+})();
+</script>
+</body>
+</html>
